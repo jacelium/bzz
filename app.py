@@ -1,7 +1,9 @@
 # Config
 deny_list = None # List of account names. If set, these users will not trigger a response
-allow_list = ['jacel@m.prettyshiny.org'] # List of account names. If set, these are the only users who will trigger a response
-scaler = 1 # All triggers will be scaled by this amount. e.g. to half all triggers, set this to 0.5 or 1/2
+allow_list = None # List of account names. If set, these are the only users who will trigger a response
+
+scaler = 1/3 # All triggers will be scaled by this amount. e.g. to half all triggers, set this to 0.5 or 1/2
+
 poll_interval = 10 # The minimum space between shocks. Also the interval for polling for replies.
 verbose = False # Extra output
 closed_marker = '[FINISHED]' # Appended to a post's CW when closing it
@@ -12,9 +14,12 @@ strict = False
 
 # These will be posted if target_id is unset
 
-post_body = "This is the post that will be made on your behalf. :boost_ok:"
-post_cw = "Enter some valid CWs and keywords here!"
-post_privacy = "unlisted" # direct, private unlisted public
+post_body = """Fully automated and with some ability to close down and report on a session now!"
+
+"Oh no the Pishock is really easily scriptable and I might've written an integration that will shock me every time someone replies to this toot with 'bzz', with the number of Zs from 1-10 corresponding to the intensity from 10-100!"
+"""
+post_cw = "kink, painplay, remote toys"
+post_privacy = "public" # direct, private unlisted public
 
 # File paths - files are used for storing some mostly ephemeral stuff and also config/logs
 # TODO: Should use actual Python logging but this is quick-and-dirty
@@ -189,7 +194,6 @@ if target_id is None:
   with open(targetfilepath, 'a') as file:
     pass
   with open(targetfilepath, 'w+') as file:
-    print(f'writing {target_id} to file')
     file.writelines([f'{target_id}'])
 
 # Ensure lastfile exists
