@@ -1,5 +1,5 @@
 # config/state files
-creds.json
+*creds.json
 *user.secret
 *client.secret
 last.txt
