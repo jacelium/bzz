@@ -66,6 +66,6 @@ class Config:
   def save(self, filename):
     try:
       with open(filename, 'w') as config_file:
-        config_file.write(self._get_as_json())
+        json.dump(asdict(self), config_file, indent=2)
     except Exception as e:
       print(f'unable to save {filename}')

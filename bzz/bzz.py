@@ -26,9 +26,10 @@ class Bzz:
       print(f'Malformed configuration: {e}')
       raise
     except FileNotFoundError as e:
-      print(f'Config file does not exist. Creating a defaulted config under {self.config_file_path}.')
+      print(f'Config file does not exist. Creating a defaulted config under {self.config_file_path}. Edit this file and re-run!')
       self.c = Config()
       self.c.save(self.config_file_path)
+      exit()
 
     self.parse_function = parse_function
     self.act_function = act_function
@@ -203,7 +204,9 @@ class Bzz:
     while True:
       try:
         self.act_function(self.queue.pop(0), self.target_id, self.c)
-      except Exception as e:
+      except IndexError as e:
         if self.c.verbose: print('Nothing to send')
+      except Exception as e:
+        print(e)
 
       time.sleep(self.c.act_interval)
