@@ -37,6 +37,8 @@ class Bzz:
     if self.c.close_stats and self.stats_function is None:
       print('*** Warning: `close_stats` is true and no stats function is set ***')
 
+    self.empty_function = kwargs.get('empty_function', None)
+
     self.log = logging.getLogger(__name__)
 
     self.queue = []
@@ -203,9 +205,16 @@ class Bzz:
 
     while True:
       try:
-        self.act_function(self.queue.pop(0), self.target_id, self.c)
+        result = self.act_function(self.queue[0], self.target_id, self.c)
+        if result != False:
+          self.queue.pop(0)
       except IndexError as e:
         if self.c.verbose: print('Nothing to send')
+
+        if self.empty_function is not None:
+          result = self.empty_function(self.queue) # Manipulate the queue in some way...
+          if result == True:
+            continue # ...and immediately process it we returned True.
       except Exception as e:
         print(e)
 
