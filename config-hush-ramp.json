@@ -1,0 +1,19 @@
+{
+  "name": "Default",
+  "deny_list": null,
+  "allow_list": null,
+  "parse_interval": 10,
+  "act_interval": 1,
+  "verbose": false,
+  "closed_marker": "[FINISHED]",
+  "close_stats": true,
+  "strict": false,
+  "post_body": "So, let's try something new. This post is now driving a Hush plug, which is seated snugly inside me.\n\n * For every bzz this gets, you can increase the intensity by up to 30% based on 1-3 Zs!\n * And adding intensity will also add 20s to the time the current level will be maintained.\n * But for every 5s with no new intensity boosts, it'll gradually decay by 5%.\n\nThe goal is to keep me squirming uninterruptedly as long as possible! Afterwards, there'll be some stats because I'm silly. :>",
+  "post_cw": "kink, vibrations, remote toys, public access",
+  "post_privacy": "direct",
+  "logfilepath": "./hushramplog.txt",
+  "lastfilepath": "./hushramplast.txt",
+  "credsfilepath": "./creds.json",
+  "targetfilepath": "./hushramptarget.txt",
+  "knownfilepath": "./hushrampknown.txt"
+}

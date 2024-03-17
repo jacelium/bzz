@@ -1,0 +1,19 @@
+{
+  "name": "Default",
+  "deny_list": null,
+  "allow_list": null,
+  "parse_interval": 10,
+  "act_interval": 1,
+  "verbose": false,
+  "closed_marker": "[FINISHED]",
+  "close_stats": true,
+  "strict": false,
+  "post_body": "Buzzes for like one iteration when triggered",
+  "post_cw": "kink, vibrations, remote toys, public access",
+  "post_privacy": "direct",
+  "logfilepath": "./hushlog.txt",
+  "lastfilepath": "./hushlast.txt",
+  "credsfilepath": "./creds.json",
+  "targetfilepath": "./husPhtarget.txt",
+  "knownfilepath": "./hushknown.txt"
+}

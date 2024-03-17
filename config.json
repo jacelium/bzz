@@ -1,0 +1,19 @@
+{
+  "name": "Default",
+  "deny_list": null,
+  "allow_list": null,
+  "parse_interval": 10,
+  "act_interval": 5,
+  "verbose": false,
+  "closed_marker": "[FINISHED]",
+  "close_stats": true,
+  "strict": false,
+  "post_body": "@jacel@m.prettyshiny.org Zap zap zap.",
+  "post_cw": "TESTING",
+  "post_privacy": "direct",
+  "logfilepath": "./log.txt",
+  "lastfilepath": "./last.txt",
+  "credsfilepath": "./creds.json",
+  "targetfilepath": "./target.txt",
+  "knownfilepath": "./known.txt"
+}
