@@ -50,22 +50,41 @@ Just run `python3 app.py` for the example app. This shows the following usage th
 - `python3 app.py closepost`: attempts to 'close' the current post - appends a marker to its CWs and optionally generates statistics.
 
 # General structure
-The application has an internal queue, and the main two user-provided methods interact with it.
+The application has an internal queue, and the main two user-provided methods interact with it. It has an idea of what post it's 'attached' to, by ID.
 
 - `parse_function` reads the body of a Mastodon post on a cadence set by the config variable `parse_interval` and extracts whatever you want from it. It then drops it onto the queue.
+  - Receives the following arguments:
+    - The current item (see [here](https://mastodonpy.readthedocs.io/en/stable/02_return_values.html#toot-status-dicts) for the format of this object)
+    - The `config` object for Bzz.
+  - Returns:
+    - The item to be appended to the queue
   - You can read anything you like from the post and then dump it into the queue.
   - You can also update global state from here to do other things - how often has this user replied, current intensity of output, whatever.
   - In the basic application, this method matches `[bB][z]{1,10}` against the post and counts the length of the match to get a value from 1-10. It also captures the current user and the time of the post.
   - What gets pushed to the queue is `[intensity, acct, post_time]`
 - `act_function` receives one item from the queue on a cadence set by the config variable `act_interval` and performs some actions. 
+  - Receives the following arguments:
+    - The current item (The format of this will match whatever you returned from `parse`)
+    - The ID of the current listen-target
+    - The `config` object for Bzz.
+  - Returns:
+    - Nothing
   - What actions? Whatever you like! Set an intensity, set a target and smoothly ramp towards it, send outputs to two or more targets, who knows!
   - The basic application receives `[intensity, acct, post_time]`, and simply triggers a shock of the appropriate intensity by calling `ps.shock(intensity 1)`. (It also does some global scaling to allow for comfort levels and some logging for statistical purposes but that's not part of the actual 'make stuff happen')
 
 There are two optional methods that can also be provided:
 - `empty_function` is called on the `act` cadence when the queue is empty. It receives the queue and is expected to manipulate it in some way.
+  - Receives the following arguments:
+    - The queue (a simple Python list)
+  - Returns:
+    - `True`: process the queue again immediately
+    - Anything else: Fall back to the usual queue processing behaviour
   - You can use it to push things to the queue, or to ramp down your steady-state output when there's no input, or any of a number of things
   - Return `True` to force immediate processing of the new item. Return `False` to let it fall through to the normal `act` cadence.
 - `stats_function` is called upon closing a post. It can do whatever you like with anything you've generated during the lifetime of the program.
+  - Receives the following arguments:
+    - The ID of the current listen-target
+    - The `config` object for Bzz.
   - In the basic app it reads the logfile that gets written to as part of `act`, parses the log lines and produces the following format:
     ```
     <Original post body here>
