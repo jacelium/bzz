@@ -4,7 +4,7 @@ Hooks up a Mastodon post to any API that can receive calls from Python.
 
 Just look at the config section and the parse/act methods. I've tried to make them pretty obvious!
 
-The user is expected to provide their own `parse` and `act` methods, and optionally a `generate_stats` method for adding extra data to a post when it's closed.
+The user is expected to provide their own `parse` and `act` methods, and optionally an `empty` method for when the queue has nothing to process and a `generate_stats` method for adding extra data to a post when it's closed.
 
 # Quick start with the sample app
 Requirements:
